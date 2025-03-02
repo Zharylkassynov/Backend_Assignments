@@ -1,5 +1,6 @@
 package artur.com;
 
+import artur.com.config.AppConfig;
 import artur.com.service.TeamService;
 import artur.com.singleton.MatchAnalyzer;
 import artur.com.singleton.TournamentManager;

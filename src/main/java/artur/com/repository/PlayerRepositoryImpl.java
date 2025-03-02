@@ -1,12 +1,14 @@
 package artur.com.repository;
 
 import artur.com.models.Player;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Repository
+@Qualifier("hashMapPlayerRepository")
 public class PlayerRepositoryImpl implements PlayerRepository{
     private final Map<Integer, Player> players = new HashMap<>();
 

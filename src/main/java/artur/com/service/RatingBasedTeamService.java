@@ -1,8 +1,9 @@
 package artur.com.service;
 
 import artur.com.models.Player;
-import artur.com.repository.PlayerRepositoryImpl;
+import artur.com.repository.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,8 @@ import java.util.stream.Collectors;
 public class RatingBasedTeamService implements TeamService {
 
     @Autowired
-    private PlayerRepositoryImpl playerRepository;
+    @Qualifier("hashMapPlayerRepository")
+    private PlayerRepository playerRepository;
 
     @Autowired
     private int maxPlayersInTeam;
@@ -25,7 +27,7 @@ public class RatingBasedTeamService implements TeamService {
         List<Player> topPlayers = playerRepository.getAllPlayers().values().stream()
                 .sorted(Comparator.comparingInt(Player::getRating).reversed())
                 .limit(maxPlayersInTeam)
-                .collect(Collectors.toList());
+                .toList();
 
         System.out.println("Team selected based on rating: ");
         topPlayers.forEach(player -> System.out.println(player.getName()));
